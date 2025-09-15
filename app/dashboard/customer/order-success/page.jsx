@@ -1,29 +1,25 @@
-// app/order-success/page.jsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { 
   CheckCircle, 
   Home, 
   ShoppingBag, 
   Clock, 
-  MapPin, 
-  Phone,
+  Package,
   CreditCard,
   Banknote,
-  Package,
   Star,
   RefreshCw
 } from 'lucide-react';
 
-export default function OrderSuccessPage() {
-  const router = useRouter();
+export default function OrderDetails() {
   const searchParams = useSearchParams();
-  
+
   const [orderDetails, setOrderDetails] = useState(null);
   const [loading, setLoading] = useState(true);
-  
+
   const orderId = searchParams.get('orderId');
   const orderNumber = searchParams.get('orderNumber');
   const paymentId = searchParams.get('paymentId');
@@ -39,8 +35,6 @@ export default function OrderSuccessPage() {
 
   const fetchOrderDetails = async () => {
     try {
-      // For now, we'll use the data from URL params
-      // Later you can fetch full order details from API if needed
       setOrderDetails({
         orderId,
         orderNumber,
@@ -89,18 +83,22 @@ export default function OrderSuccessPage() {
     );
   }
 
+  if (!orderDetails) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center"><p>No order details found.</p></div>;
+  }
+
   const paymentDisplay = getPaymentMethodDisplay();
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-2xl mx-auto px-4 py-8">
-        
+
         {/* Success Header */}
         <div className="bg-white rounded-xl shadow-sm p-8 text-center mb-8">
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-12 h-12 text-green-600" />
           </div>
-          
+
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Order Confirmed!</h1>
           <p className="text-lg text-gray-600 mb-6">
             {paymentMethod === 'cod' 
@@ -227,7 +225,7 @@ export default function OrderSuccessPage() {
                 <li>• You'll receive SMS updates on your order status</li>
                 <li>• Our delivery partner will pick up and deliver to you</li>
                 {paymentMethod === 'cod' && (
-                  <li>• <strong>Please keep ₹{searchParams.get('amount') || 'exact change'} ready for COD</strong></li>
+                  <li><strong>• Please keep ₹{searchParams.get('amount') || 'exact change'} ready for COD</strong></li>
                 )}
               </ul>
             </div>
@@ -238,7 +236,9 @@ export default function OrderSuccessPage() {
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <button
-              onClick={() => router.push('/dashboard/customer/orders')}
+              onClick={() => {
+                window.location.href = '/dashboard/customer/orders';
+              }}
               className="flex items-center justify-center gap-2 bg-orange-600 text-white py-4 rounded-xl hover:bg-orange-700 font-bold text-lg transition-colors"
             >
               <ShoppingBag className="w-5 h-5" />
@@ -246,7 +246,9 @@ export default function OrderSuccessPage() {
             </button>
 
             <button
-              onClick={() => router.push('/')}
+              onClick={() => {
+                window.location.href = '/';
+              }}
               className="flex items-center justify-center gap-2 border-2 border-gray-300 text-gray-700 py-4 rounded-xl hover:bg-gray-50 font-bold text-lg transition-colors"
             >
               <Home className="w-5 h-5" />
@@ -257,7 +259,6 @@ export default function OrderSuccessPage() {
           {orderNumber && (
             <button
               onClick={() => {
-                // Add reorder functionality later
                 alert('Reorder functionality will be added soon!');
               }}
               className="w-full flex items-center justify-center gap-2 text-orange-600 py-3 rounded-lg hover:bg-orange-50 font-medium transition-colors"
