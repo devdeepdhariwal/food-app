@@ -1,7 +1,11 @@
 # 🍕 Devdeep Dhariwal Food App
 
 A comprehensive food delivery platform built with **Next.js 15** featuring multi-role authentication, real-time order management, and seamless payment integration. This full-stack application supports **Customers**, **Vendors (Restaurants)**, and **Delivery Partners** with dedicated dashboards and features.
+## 🌐 Live Demo
 
+🚀 **[View Live Application](https://food-app-six-tau.vercel.app)**
+
+> Experience the full functionality of our food delivery platform with real-time features and multi-role dashboards.
 ## 🚀 Features
 
 ### 🔐 Authentication System
