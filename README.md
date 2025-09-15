@@ -6,6 +6,9 @@ A comprehensive food delivery platform built with **Next.js 15** featuring multi
 🚀 **[View Live Application](https://food-app-six-tau.vercel.app)**
 
 > Experience the full functionality of our food delivery platform with real-time features and multi-role dashboards.
+> 
+> **⚠️ Important:**  
+_Currently, restaurants are available only for **pincode 125001**. Please use this pincode to browse and order food._
 ## 🚀 Features
 
 ### 🔐 Authentication System
